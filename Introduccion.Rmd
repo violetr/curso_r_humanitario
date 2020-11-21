@@ -1,0 +1,491 @@
+---
+title: "Intro"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "custom.css"]
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.height=5) 
+library(ggplot2)
+library(readr)
+library(here)
+library(dplyr)
+library(colorspace)
+paleta <- rainbow_hcl(10)
+print_it_rainbow <- function(palabra, paleta) {
+  i_font = 1
+  for (char in palabra) {
+    if (char != " ") {
+      cat(paste0("<font style='color:", paleta[i_font] , "'>",char,"</font>"))
+      i_font = i_font %% length(paleta) + 1
+    } else {
+      cat(" ")
+    }
+  }
+}
+```
+
+background-color: #272822
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+```{r, results='asis', echo=FALSE}
+cat("# <center>")
+palabra = unlist(strsplit("R para contextos humanitarios de emergencia", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center> \n")
+cat("## <center>")
+palabra = unlist(strsplit("Introducción", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center> \n")
+cat("### <center>")
+fecha = as.character(Sys.Date())
+palabra = unlist(strsplit("18-11-2020", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center>")
+```
+
+---
+
+```{r, results='asis', echo=FALSE}
+cat("#")
+palabra = unlist(strsplit("Hola!", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("\n")
+```
+
+- Me llamo **Violeta**
+
+- Soy **Matemática** e **Instructora Certificada por RStudio**
+
+- Me gusta **visualizar datos, ir a museos, tomar té, etc, etc.**
+
+
+
+---
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Objetivos del taller", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("\n")
+```
+
+- Entender qué y para qué sive es R y RStudio
+- Saber buscar ayuda en el mundo R
+- Poder hacer un análisis de datos sencillo pero completo, todo en R
+- Poder aprovechar R para introducirlo en su flujo de trabajo habitual
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Modalidad del taller", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("\n")
+```
+
+- Ejercicios intercalados para interactuar
+- Presentación de los temas con ejemplos
+- "Live coding"
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Requisitos", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("\n")
+```
+
+- Asumimos que ya tienen instalado R y RStudio
+- En caso contrario: seguir los pasos en este video  
+
+---
+
+
+
+```{r, results='asis', echo=FALSE}
+cat("##")
+palabra = unlist(strsplit("Programa", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("\n")
+```
+
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-yj5y{background-color:#efefef;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-c4ww{background-color:#55B8D0;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-zme7{background-color:#BDAB66;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-wp8o{border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-0449{background-color:#333333;border-color:inherit;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-uhiu{background-color:#DE94C8;border-color:#333333;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-o8le{background-color:#efefef;border-color:#333333;text-align:center;vertical-align:top}
+.tg .tg-qyuf{background-color:#DE94C8;border-color:#333333;text-align:center;vertical-align:top}
+.tg .tg-4m7p{background-color:#96B56C;border-color:inherit;text-align:center;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-wp8o"></th>
+    <th class="tg-0449">1er dia</th>
+    <th class="tg-0449">2do dia</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0449">10h-11h</td>
+    <td class="tg-uhiu">Intro a R y RStudio</td>
+    <td class="tg-c4ww"><span style="font-weight:bold">Visualización de datos</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0449">11h-11h10</td>
+    <td class="tg-o8le">Pausa corta</td>
+    <td class="tg-yj5y">Pausa corta</td>
+  </tr>
+  <tr>
+    <td class="tg-0449">11h10-12h</td>
+    <td class="tg-qyuf"><span style="font-weight:bold">Intro a RMarkdown</span></td>
+    <td class="tg-c4ww"><span style="font-weight:bold">Mas manipulación de datos</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0449">12h-12h10</td>
+    <td class="tg-o8le">Pausa corta</td>
+    <td class="tg-yj5y">Pausa corta</td>
+  </tr>
+  <tr>
+    <td class="tg-0449">12h10-13h</td>
+    <td class="tg-qyuf"><span style="font-weight:bold">Lectura de datos</span></td>
+    <td class="tg-c4ww"><span style="font-weight:bold">Crear funciones</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0449">13h-14h</td>
+    <td class="tg-yj5y">Almuerzo</td>
+    <td class="tg-yj5y">Almuerzo</td>
+  </tr>
+  <tr>
+    <td class="tg-0449">14h-15h</td>
+    <td class="tg-zme7"><span style="font-weight:bold">Manipulación de datos</span></td>
+    <td class="tg-4m7p"><span style="font-weight:bold">Visualización de datos</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0449">15h10-15h10</td>
+    <td class="tg-yj5y">Pausa corta</td>
+    <td class="tg-yj5y">Pausa corta</td>
+  </tr>
+  <tr>
+    <td class="tg-0449">15h10-16h10</td>
+    <td class="tg-zme7"><span style="font-weight:bold">Manipulación de datos</span></td>
+    <td class="tg-4m7p"><span style="font-weight:bold">Interacciones con Kobo y Power BI</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0449">16h10-16h20</td>
+    <td class="tg-yj5y">Pausa corta</td>
+    <td class="tg-yj5y">Pausa corta</td>
+  </tr>
+  <tr>
+    <td class="tg-0449">16h20-17h</td>
+    <td class="tg-zme7"><span style="font-weight:bold">Visualización de datos</span></td>
+    <td class="tg-4m7p"><span style="font-weight:bold">Informes con RMarkdown</span></td>
+  </tr>
+</tbody>
+</table>
+
+
+
+---
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Desafios del taller", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("\n")
+```
+
+
+- [leer correctamente una base de datos](desafio-1.html)
+
+- [generar nuevas columnas a partir de información de otras columnas y generar resúmenes a partir de los datos.](desafio-2html)
+
+- [generar gráficos a partir de la base de datos usada.](desafio-3.html)
+
+- [generar un informe que incluya gráficos, texto y un análisis descriptivo.](desafío-4.html)
+
+---
+
+```{r xaringan-editable, echo=FALSE}
+xaringanExtra::use_editable(expires = 1)
+```
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Herramientas para analizar datos que utilicen", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+```
+
+.flex[
+.can-edit[
+- Excel
+- GIS
+- Power BI
+- Word
+]
+]
+
+.flex[
+.w-50[
+**Ventajas**
+.can-edit.key-rstudio-gets-me[
+- Intuitivos para usar
+]
+]
+
+.w-50[
+**Desventajas**
+.can-edit.key-rstudio-gets-me-not[
+- Son muy especificos para cada tarea
+]
+]
+]
+
+
+
+---
+
+Si ya tenemos:
+
+- Excel
+- Kobo
+- GIS
+- Power BI
+- Word
+- InDesign
+- Ilustrator
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Entonces por qué R?", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+```
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Porque con R podemos:", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+```
+
+- realizar la mayoria de esas tareas
+- automatizar procesos
+- interactuar facilmente con muchas herramientas
+- es abierto y gratuito
+
+---
+
+```{r, results='asis', echo=FALSE}
+cat("## ")
+palabra = unlist(strsplit("Algunas cosas que podemos hacer en R", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+```
+
+- Leer datos
+- Transformar y resumir datos
+- Visualizar datos
+
+
+- Generar reportes automáticos
+
+- Crear sitios web. p. ej.: https://violetr.netlify.app/
+
+- Hacer aplicaciones interactivas: 
+  - https://shiny.rstudio.com/gallery/india-blood-banks.html
+  - https://violetr.shinyapps.io/hiv_hnp/
+  - https://vac-lshtm.shinyapps.io/ncov_tracker
+  
+---
+
+```{r, results='asis', echo=FALSE}
+cat("# ")
+palabra = unlist(strsplit("R en contextos humanitarios de emergencia", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+```
+
+Hay un grupo de usuarios y desarrolladores de R que trabajan con este tipo de datos
+
+[HumanitaRian useR group](https://humanitarian-user-group.github.io/about/)
+
+
+- Creado en una reunión de la UNHCR
+- Blog y grupo de Skype
+- Documentación y Reproducibilidad de los procesos
+
+
+
+---
+
+
+background-color: #272822
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+```{r, results='asis', echo=FALSE}
+cat("# <center>")
+palabra = unlist(strsplit("Empezamos!", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center>")
+```
+
+
+---
+
+<div class="my-header"></div>
+
+# Qué es R? Qué es RStudio?
+
+- R es el lenguaje de programación, es la forma de darle instrucciones a la computadora 
+
+- RStudio es la interfaz gráfica (lo que vemos)
+
+
+
+
+![](img/lenguajes.png)
+
+---
+
+<div class="my-header"></div>
+
+# RStudio
+
+A la izquierda, en la consola, podemos escribir código en R 
+
+Este se ejecutará al apretar `Enter`
+
+![](img/Rstudio.png)
+
+
+
+
+---
+
+<div class="my-header"></div>
+
+# RStudio
+
+Vamos a hacer cosas interesantes, y vamos a querer guardarlas
+
+Por eso la configuración normal de RStudio será asi, con cuatro paneles
+
+El de arriba a la izquierda es un bloc de notas
+
+![](img/Rstudio2.png)
+
+
+---
+
+<div class="my-header"></div>
+
+# RStudio culinario
+
+![](img/rstudio-cocina.png)
+<p style="color: gray; font-size:15px"> Imagen del curso "R para Clima" - Paola Corrales y Elio Campitelli <br>
+https://eliocamp.github.io/r-clima/index.html
+</p>
+
+---
+
+<div class="my-header"></div>
+
+# Cómo le damos instrucciones a R?
+
+Como ya vieron en el video para instalar R, podemos pedirle a R que compute operaciones básicas.
+Y también no tan básicas.
+
+```{r}
+2 + 2
+```
+
+```{r}
+sqrt(2)
+```
+
+Esto solo nos devuelve el valor
+
+Pero nos gustaría guardarlo en algún lado (que quede disponible en la mesada)
+
+```{r}
+raiz_dos <- sqrt(2)
+raiz_dos
+```
+
+---
+<div class="my-header"></div>
+
+# Variables en R
+
+```{r}
+raiz_dos <- sqrt(2)
+raiz_dos
+```
+
+**En Excel:**
+
+Es parecido a hacer =SQRT(2) en la celda A2
+
+Sabemos que ese resultado está en la celda A2
+
+**En R:**
+
+Ese resultado está en la variable `raiz_dos` que aparece en el environment (la mesada)
+
+**Pero! La analogía no es 100% util:**
+
+```{r}
+x <- 2
+y <- x + 2
+x <- 3
+```
+
+---
+<div class="my-header"></div>
+# Funciones en R
+
+R tiene funciones útiles directamente incorporadas
+
+ej: `sqrt`, `+`,  `-`, `mean`
+
+Se aplican a una o más variables y devuelven un valor
+
+ej: `sqrt` se aplica a un numero positivo y devuelve su raíz cuadrada
+
+Pero! nuestro objetivo es realizar análisis de datos
+
+Entonces necesitamos mas funciones que las default en R 
+
+Tenemos acceso a más funciones que las básicas a partir de ''
+
+
+
+
