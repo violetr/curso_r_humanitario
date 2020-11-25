@@ -3,9 +3,9 @@ title: "03-EJ-manipulacion"
 output: html_document
 ---
 
-En esta sección trabajaremos con el paquete dplyr para modificar datos. Usaremos los dos datasets del módulo importar Haiti y decisiones Peru.
+En esta sección trabajaremos con el paquete dplyr para modificar datos. Usaremos los el dataset decisiones Perú.
 
-Los cargamos en este bloque de codigo
+Los cargamos en este bloque de código
 
 ```{r}
 decisiones <- read_csv("data/decisiones_asilo_peru.csv")

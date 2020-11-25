@@ -59,8 +59,30 @@ palabra = unlist(strsplit("25-11-2020", split = ""))
 cat(print_it_rainbow(palabra, paleta))
 cat("</center>")
 ```
+---
+
+background-color: #272822
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+```{r, results='asis', echo=FALSE}
+cat("<h1 style='color:white'> <center> Abrir el archivo 04-EJ-visualizacion.Rmd")
+cat("</center></h1> \n")
+cat("## <center>")
+palabra = unlist(strsplit("Para ir haciendo los EJ", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center> \n")
+```
+
 
 ---
+
 <div class="my-header"></div>
 ## Visualización de datos
 
@@ -90,13 +112,6 @@ ggplot(data = NULL, aes(1:20, 2 + 1.5 * 1:20 + rnorm(20))) +
 ## Ejemplos:
 
 <center><img src="img/mapa1_ejemplo.png"  height="530"></center>
-
----
-<div class="my-header"></div>
-## Ejemplos:
-
-<center><img src="img/mandalasintitulo_white.jpeg"  height="580"></center>
-
 
 ---
 <div class="my-header"></div>
@@ -222,11 +237,11 @@ azul</p>
 <br>
 
 <center>
-<p>Yes</p>
+<p>No</p>
 </center>
 
 <center>
-<p>No</p>
+<p>Yes</p>
 </center>
 
 
@@ -286,14 +301,15 @@ La leyenda se agrega automáticamente
   - shape
 
 
-2.que pasa si las variables son continuas o categóricas
+2.Qué pasa si las variables son continuas o categóricas
 
 ---
 <div class="my-header"></div>
 
 ## Posibles mapeos
 
-![](img/variables-aes.png)
+<center><img src="img/variables-aes.png"  height="530"></center>
+
 ---
 <div class="my-header"></div>
 
@@ -792,13 +808,27 @@ patchs + plot_annotation(title = "Resumen de Haiti")
 
 ## DESAFIO 2
 
-1. Importa el dataset `dtm3-peru` (cuidado con la primera fila, puedes saltearla)
+1. Importa el dataset `dtm3-peru` (cuidado con la primera fila, salteala)
+
+[https://data.humdata.org/dataset/dad01c41-adde-46ee-998d-a6baf9eeb8d1/resource/538975d3-f7bb-4f0d-9111-58f7e00ee4f1/download/dtm3_version_publica_1209-1.xlsx](https://data.humdata.org/dataset/dad01c41-adde-46ee-998d-a6baf9eeb8d1/resource/538975d3-f7bb-4f0d-9111-58f7e00ee4f1/download/dtm3_version_publica_1209-1.xlsx)
 
 2. Cuántas personas respondieron la encuesta?
 
-3. Hacer un gráfico que represente "Número de Familias que viven en la misma carpa o techo"
+3. Haz un gráfico que represente la distribución del "Número de Familias que viven en la misma carpa o techo"
 
-4. 
+4. Representa con la ayuda de la guía rápida un gráfico de barras apiladas del "Número de Familias que viven en la misma carpa o techo" que discrimine según distrito
+
+5. Representa con la ayuda de la guía rápida un gráfico de barras lado a lado del "Número de Familias que viven en la misma carpa o techo" que discrimine según distrito
+
+---
+<div class="my-header"></div>
+
+
+6. Representa el "Número de Familias que viven en la misma carpa o techo" en paneles según el distrito
+
+7. Que tipo de ganados tienen l@s encuestad@s? usar `?count` (ayuda) para averiguar cuántas personas tienen cada tipo de ganado 
+
+8. Explora las preguntas que te interesen
 
 ---
 <div class="my-header"></div>
