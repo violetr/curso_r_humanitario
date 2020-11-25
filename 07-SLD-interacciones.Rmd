@@ -1,0 +1,97 @@
+---
+title: "Interaccion con Kobo y Power BI"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "custom.css"]
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 13:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.height=5) 
+library(ggplot2)
+library(readr)
+library(here)
+library(dplyr)
+library(colorspace)
+paleta <- rainbow_hcl(10)
+print_it_rainbow <- function(palabra, paleta) {
+  i_font = 1
+  for (char in palabra) {
+    if (char != " ") {
+      cat(paste0("<font style='color:", paleta[i_font] , "'>",char,"</font>"))
+      i_font = i_font %% length(paleta) + 1
+    } else {
+      cat(" ")
+    }
+  }
+}
+```
+
+background-color: #272822
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+```{r, results='asis', echo=FALSE}
+cat("<h1 style='color:white'> <center> R para contextos humanitarios de emergencia")
+cat("</center></h1> \n")
+cat("## <center>")
+palabra = unlist(strsplit("Interaccion con Kobo y Power BI", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center> \n")
+cat("### <center>")
+fecha = as.character(Sys.Date())
+palabra = unlist(strsplit("25-11-2020", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center>")
+```
+
+---
+<div class="my-header"></div>
+## Visualizacion de datos
+
+
+<center><img src="img/ggplot2_obra_maestra.png"  width="750"></center>
+
+---
+<div class="my-header"></div>
+## Ejemplos:
+
+```{r, echo=FALSE, fig.height=6, fig.width=9, fig.retina=3}
+plot(1:20, 2 + 1.5 * 1:20 + rnorm(20)) 
+```
+---
+<div class="my-header"></div>
+## Ejemplos:
+
+```{r, echo = FALSE, fig.height=6, fig.width=9, fig.retina=6}
+ggplot(data = NULL, aes(1:20, 2 + 1.5 * 1:20 + rnorm(20))) +
+  geom_point() +
+  labs(x = "x", y = "y", title = "Mi gráfico", subtitle = "Es muy lindo") +
+  theme(plot.title.position = "plot", title = element_text(size = 20))
+```
+
+---
+<div class="my-header"></div>
+## Power BI
+
+Hay varios tipos de interaccion posible entre R y Power BI
+
+
+
+
+

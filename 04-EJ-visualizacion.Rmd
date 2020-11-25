@@ -1,0 +1,124 @@
+---
+title: "04-EJ-visualizacion"
+output: html_document
+---
+
+## Tu turno 1: Mi primer gráfico
+
+
+Copia y corre el código para generar el gráfico que queremos
+
+
+```{r}
+
+```
+
+
+##  Tu turno 2: 
+
+1.Agrega varias propiedades estéticas a tu gráfico:
+  - color
+  - size
+  - alpha
+  - shape
+
+```{r}
+
+```
+
+
+2.que pasa si las variables son continuas o categóricas
+
+
+# Tu turno 3
+
+Reproducir el histograma de la variable Households con la ayuda de la guía rápida de `ggplot2`
+
+Ayuda: no utilizar la variable `y`
+
+```{r}
+
+```
+
+
+## Tu turno 5
+
+Predice la salida del siguiente código
+
+Luego, córrelo
+
+```{r, eval = FALSE}
+ggplot(data = haiti) + 
+  geom_point(mapping = aes(x = Households, y = Individuals)) +
+  geom_smooth(mapping = aes(x = Households, y = Individuals))
+```
+
+## Tu turno 6
+
+Salva tu último gráfico en la carpeta data de tu proyecto
+
+Si por algún motivo no estás en un proyecto, vuelve al proyecto del curso y si no tienes proyecto del curso vuelve a abrirlo
+
+
+## Tu turno 7:
+
+
+Modifica el gráfico anterior para que la línea sea roja y cambia su grosor
+
+```{r}
+
+```
+
+
+## Tu turno 8:
+
+Corre el siguiente codigo. 
+
+```{r}
+decisiones %>%
+  ggplot() +
+    geom_line(aes(Anio, total, 
+                  color = `Codigo Pais Origen`))
+```
+
+Los colores no pueden distinguiste bien.
+
+Grafica en un mismo plot la evolución del total de pedidos de asilo en Perú para los 5 países con mas pedidos
+
+```{r}
+
+```
+
+
+
+## Tu turno 9:
+
+1. Con la ayuda de la guía rapida intenta reproducir este gráfico que indica con una línea punteada el año del importante terremoto en Haití
+
+2. Quita la línea y modifícalo para que se vea en paneles 
+
+```{r}
+
+```
+
+## Tu turno 10
+
+Instala `patchwork` y reproduce el siguiente gráfico
+
+```{r}
+
+```
+
+
+## DESAFIO 2
+
+1. Importa el dataset `dtm3-peru` (cuidado con la primera fila, salteala)
+
+2. Cuántas personas respondieron la encuesta?
+
+3. Hacer un gráfico que represente "Número de Familias que viven en la misma carpa o techo"
+
+4. 
+
+
+- Anotaciones
