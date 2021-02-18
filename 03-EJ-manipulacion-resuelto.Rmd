@@ -1,0 +1,113 @@
+---
+title: "03-EJ-manipulacion"
+output: html_document
+---
+
+En esta sección trabajaremos con el paquete dplyr para modificar datos. Usaremos los el dataset decisiones Colombia.
+
+Los cargamos en este bloque de código
+ 
+```{r}
+library(tidyverse)
+decisiones <- read_csv("data/decisiones_asilo_colombia.csv")
+```
+
+
+## Tu turno 1
+
+Te dieron una tabla con datos de decisiones a pedidos de asilo tomadas por los distintos países del mundo. Las columnas son: `anio`, `pais_origen`, `pais_asilo`, `pedidos_aceptados` y `pedidos_rechazados`. En base a esos datos, te piden que computes la cantidad total de pedidos de asilo recibidas por Colombia en cada año.
+
+¿En qué orden ejecutarías estos pasos para obtener el resultado deseado?
+
+- usar `summarise()` para calcular el total sum(`total_pedidos`) para cada `anio`
+- usar `group_by()` para agrupar por la columna `anio`
+- usar `mutate()` para generar una columna llamada `total_pedidos` que sea 
+`aceptados + rechazados`
+- usar `filter()` para seleccionar solo las filas donde la columna `pais_origen` es igual a "Colombia"
+
+
+## Tu turno 2: verbos `select` y `filter`
+
+1. Seleccionar solo las variables Anio, `Codigo Pais Origen`
+
+2. Filtrar las entradas de los países Turquía y Argentina
+
+
+```{r}
+decisiones_2 <- select(decisiones, c(Anio, `Codigo Pais Origen`))
+# la barra vertical es un "o"
+decisiones_3 <- filter(decisiones, `Codigo Pais Origen` == "ARG" | `Codigo Pais Origen` == "TUR")
+```
+
+## Tu turno 3: verbo `mutate`
+
+1. Generar una nueva columna que indique para cada fila si fueron rechazados mas pedidos que los aceptados
+
+2. Generar una nueva columna que indique para cada fila si el tipo de procedimiento es UNHCR
+
+3. Generar una nueva columna con la cantidad de pedidos rechazados o con proteccion complementaria
+
+```{r}
+decisiones_ind_1 <- mutate(decisiones, indicador = as.numeric(Rechazadas > Reconocidas))
+
+decisiones_ind_2 <- mutate(decisiones, indicador = `Nombre del Procedimiento` == "UNHCR")
+
+decisiones_ind_3 <- mutate(decisiones, indicador = Rechazadas + `Proteccion Complementaria`)
+```
+
+
+## Tu turno 4: verbos `dplyr`
+
+1. Obtener una tabla con la cantidad de pedidos de asilo rechazados por Colombia durante cada año
+
+2. Ordena esta tabla de mayor a menor según la cantidad de pedidos rechazados
+
+3. ¿Qué cantidad de pedidos fueron rechazados en total durante el período estudiado?
+
+
+```{r}
+decisiones_rechazados_peru <- decisiones %>%
+  group_by(Anio) %>%
+  summarise(total_anio_rech = sum(Rechazadas)) %>%
+  arrange(desc(total_anio_rech))
+
+total_rechazadas <- decisiones %>%
+  summarise(total = sum(Rechazadas))
+
+```
+
+## Tu turno 5
+
+```{r}
+library(readxl)
+library(tidyverse)
+data_4W <- read_excel("data/4W_Publico_Consolidado_septiembre.xlsx")
+
+data_4W %>%
+  mutate(Municipio = str_to_lower(Municipio),
+         Municipio = str_replace_all(Municipio, "á", "a"),
+         Municipio = str_replace_all(Municipio, "í", "i"),
+         Municipio = str_replace_all(Municipio, "ó", "o"),
+         Municipio = str_replace_all(Municipio, "é", "e"),
+         Municipio = str_replace_all(Municipio, "ú", "u")) %>%
+  distinct(Municipio)
+
+data_4W %>%
+  mutate(Departamento = str_to_lower(Departamento)) %>%
+  distinct(Departamento)
+
+length(union(data_4W$`Socio principal`, data_4W$`Socio implementador`))
+
+data_4W %>%
+  filter(Estado == "Completada") %>%
+  summarise(sum(Cantidad, na.rm = TRUE))
+
+data_4W %>%
+  filter(Estado == "Completada") %>%
+  summarise(sum(`Beneficiarios mensuales`, na.rm = TRUE))
+
+data_4W_comunicacion <- data_4W %>%
+  filter(Sector == "Comunicación")
+union(data_4W_comunicacion$`Socio principal`, data_4W_comunicacion$`Socio implementador`)
+```
+

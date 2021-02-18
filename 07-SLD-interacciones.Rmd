@@ -50,48 +50,259 @@ background-color: #272822
 cat("<h1 style='color:white'> <center> R para contextos humanitarios de emergencia")
 cat("</center></h1> \n")
 cat("## <center>")
-palabra = unlist(strsplit("Interaccion con Kobo y Power BI", split = ""))
+palabra = unlist(strsplit("Interacción con Kobo y Power BI", split = ""))
 cat(print_it_rainbow(palabra, paleta))
 cat("</center> \n")
 cat("### <center>")
 fecha = as.character(Sys.Date())
-palabra = unlist(strsplit("25-11-2020", split = ""))
+palabra = unlist(strsplit("Violeta Roizman", split = ""))
 cat(print_it_rainbow(palabra, paleta))
 cat("</center>")
 ```
 
 ---
 <div class="my-header"></div>
-## Visualizacion de datos
+## Kobo Toolbox
 
+Supongamos que tenemos que realizar muchas veces por semana (o por día) un **reporte** de datos proveniente de un relevamiento recogido en **Kobo Toolbox** (porque se van actualizando).
 
-<center><img src="img/ggplot2_obra_maestra.png"  width="750"></center>
+Tenemos muchas formas de hacerlo pero lo mas cómodo sera con un **único código** que podamos ejecutar y que nos genere el reporte **automáticamente**. 
+
+Podemos hacer esto con **R** a través de la **API** (Application Programming Interface) de **Kobo Toolbox**.
+
+<center><img src="img/kobologin.png" alt="Interfaz de login de Kobo Toolbox." height="250"></center>
+
+Usamos algunas funcionalidades del repositorio [ppsapkota/kobohr_apitoolbox](https://github.com/ppsapkota/kobohr_apitoolbox)
 
 ---
 <div class="my-header"></div>
-## Ejemplos:
+## Kobo: descargar respuestas de formulario
 
-```{r, echo=FALSE, fig.height=6, fig.width=9, fig.retina=3}
-plot(1:20, 2 + 1.5 * 1:20 + rnorm(20)) 
+Tenemos que generar en R una URL que le indique a Kobo lo que necesitamos
+
+```{r, eval=FALSE}
+install.packages(c("httr", "jsonlite"))
+library(httr)
+library(jsonlite)
 ```
+
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+# A completar con tus datos
+usuario = "tallerrkobo"
+contrasenia = "TallerRKobo123"
+form_id = "559546" 
+# ATENCION puedes obtener el numero de tu formulario aqui :
+# https://im.unhcr.org/kobosupport/#form
+server = "kc.kobotoolbox.org"
+# o "kc.humanitarianresponse.info" o "kc.kobotoolbox.org"
+# Generar URL para descargar datos 
+URL <- paste0("https://", server, "/api/v1/data/", form_id, ".csv")
+res <- GET(URL, authenticate(usuario, contrasenia), progress())
+
+respuestas <- read_csv(res$content)
+```
+
+```{r,eval=FALSE, echo=FALSE, message=FALSE}
+respuestas <- read_csv(res$content)
+readr::write_csv(respuestas, here::here("data", "respuestas_test.csv"))
+```
+
 ---
 <div class="my-header"></div>
-## Ejemplos:
+## Kobo: respuestas de formulario en R
 
-```{r, echo = FALSE, fig.height=6, fig.width=9, fig.retina=6}
-ggplot(data = NULL, aes(1:20, 2 + 1.5 * 1:20 + rnorm(20))) +
-  geom_point() +
-  labs(x = "x", y = "y", title = "Mi gráfico", subtitle = "Es muy lindo") +
-  theme(plot.title.position = "plot", title = element_text(size = 20))
+```{r, eval=TRUE, echo=FALSE, message=FALSE}
+respuestas <- read_csv(here::here("data", "respuestas_test.csv"), na = "n/a")
+```
+
+```{r}
+str(respuestas)
+```
+
+
+---
+<div class="my-header"></div>
+## Kobo: subir formulario
+
+Existen otras funcionalidades de Kobo
+
+- Desarrollar formularios en R y actualizarlos desde R
+- El formato en este caso es xlsx
+
+```{r, eval = FALSE}
+library(devtools)
+library(jsonlite)
+library(httr)
+# correr este codigo para cargar funciones, escribirlo todo en 1 linea:
+source_url("https://raw.githubusercontent.com/
+           ppsapkota/kobohr_apitoolbox/master/
+           R/r_func_ps_kobo_utils.R")
+
+#"kf.kobotoolbox.org" o "kobo.humanitarianresponse.info"
+kpi_url <- "https://kf.kobotoolbox.org/imports/"
+kobo_form_xlsx <- "test-formulario.xlsx" #tu formulario
+
+# la siguiente funcion crea un borrador en tu usuario
+# con las preguntas indicadas en el xlsx
+d_content<-kobohr_kpi_upload_xlsform(kpi_url,
+                kobo_form_xlsx,
+                "tallerrkobo",
+                "TallerRKobo123"
+import_url <- d_content$url
+```
+
+---
+<div class="my-header"></div>
+## Kobo: obtener ID formulario recién subido 
+
+```{r, eval = FALSE}
+d_content <- kobohr_kpi_get_asset_uid(import_url, #del paso anterior
+                                      "tallerrkobo",
+                                      "TallerRKobo123")
+asset_uid <- d_content$messages$created$uid
+# codigo del formulario que aparecera en borradores en KoboToolbox
+```
+
+<center><img src="img/kobotoolbox.png" alt="KoboToolbox" height="350"></center>
+
+---
+<div class="my-header"></div>
+## Kobo: desplegar? deployar? formulario
+
+```{r, eval = FALSE}
+kobo_server_url<-"https://kf.kobotoolbox.org/"
+kobohr_kpi_deploy_asset(asset_uid,
+                        "tallerrkobo",
+                        "TallerRKobo123")
+```
+
+Ahora ya se puede responder!
+
+***
+
+## Etc, etc.
+
+Muchas otras opciones
+
+Chequear paquete: [`koboloader`](https://github.com/mrdwab/koboloadeR)
+
+Blog introductorio: http://news.mrdwab.com/post/koboloader/
+
+---
+<div class="my-header"></div>
+## RHDX 
+
+También podemos conectarnos a HDX con [`rhdx`](https://github.com/dickoa/rhdx)
+
+```{r, eval = FALSE}
+# install.packages("remotes")
+# remotes::install_gitlab("dickoa/rhdx")
+library(rhdx)
+set_rhdx_config(hdx_site = "prod")
+
+search_datasets("Colombia", rows = 10)
+
+datitos = rhdx::pull_dataset("gifmm-joint-multi-sector-needs-assessment-covid-19-november-2020") %>%
+  get_resource(1) %>%
+  read_resource(sheet = 2)
 ```
 
 ---
 <div class="my-header"></div>
 ## Power BI
 
-Hay varios tipos de interaccion posible entre R y Power BI
+Hay varios tipos de interacción posible entre **R y Power BI**. 
+
+<center><img src="img/power-bi.jpg" alt="KoboToolbox" height="150"></center>
+
+Vamos a ver 2 interacciones posibles:
+
+- **Carga de datos** a través de R
+
+- **Generación de gráficos** con scripts de R
+
+También puede usarse R para hacer **queries de consulta** y para utilizar ciertas funcionalidades del **Market**
 
 
 
+---
+<div class="my-header"></div>
+## Power BI: Importar datos
+
+1)
+<center><img src="img/PowerBI1.png" alt="Power BI Interfaz. Acción 1 para importar datos." height="450"></center>
+
+---
+<div class="my-header"></div>
+## Power BI: Importar datos
+
+2)
+<center><img src="img/PowerBI2.png" alt="Power BI Interfaz. Acción 2 para importar datos." height="450"></center>
+
+---
+<div class="my-header"></div>
+## Power BI: Importar datos
+
+3)
+<center><img src="img/PowerBI3.png" alt="Power BI Interfaz. Acción 3 para importar datos." height="450"></center>
+
+---
+<div class="my-header"></div>
+## Power BI: Importar datos
+
+4)
+<center><img src="img/PowerBI4.png" alt="Power BI Interfaz. Acción 4 para importar datos." height="450"></center>
+
+---
+<div class="my-header"></div>
+## Power BI: Graficos de R en Power BI
+
+Generar un gráfico de R en Power BI
+
+<center><img src="img/PowerBI5.png" alt="Power BI Interfaz. Pasos a seguir para generar un gráfico de R en Power BI." height="450"></center>
+
+---
+<div class="my-header"></div>
+## Power BI: Graficos de R en Power BI
+
+Puedo agregar sliders para poder interactuar y filtrar con el gráfico
+
+Los gráficos generados en R se actualizaran automáticamente
+
+<center><img src="img/PowerBI6.png" alt="Power BI Interfaz. Gráfico de R en Power BI con sliders." height="400"></center>
+
+---
+<div class="my-header"></div>
+## Tu turno 
+
+1. Importa uno de los datasets de Colombia en Power BI usando el paquete `rhdx`
+
+2. Elige una de las variables y haz un gráfico simple con R
+
+3. Agrega slider o botones para hacerlo "interactivo" 
 
 
+---
+<div class="my-header"></div>
+## Resumen
+
+Para tener un abanico mayor de opciones, conecta a R con otras herramientas!
+
+<center><img src="img/starwars-teamwork.png" alt="Personajes de la película star wars juntando sus manos como un equipo." height="450"></center>
+
+<p style="color: gray; font-size:15px"> Ilustración de Allison Horst
+</p>
+
+---
+<div class="my-header"></div>
+
+## Licencia y material usado
+
+Licencia: [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES).
+
+Usamos algunas funcionalidades del repositorio [ppsapkota/kobohr_apitoolbox](https://github.com/ppsapkota/kobohr_apitoolbox).
+
+Usamos el paquete [`rhdx`](https://github.com/dickoa/rhdx) creado por [@dickoa](https://github.com/dickoa) para conectarnos con HDX.
+
+Las diapositivas fueron creadas con el paquete `xaringan`.

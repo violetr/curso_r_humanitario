@@ -55,12 +55,13 @@ cat(print_it_rainbow(palabra, paleta))
 cat("</center> \n")
 cat("### <center>")
 fecha = as.character(Sys.Date())
-palabra = unlist(strsplit("25-11-2020", split = ""))
+palabra = unlist(strsplit("Violeta Roizman", split = ""))
 cat(print_it_rainbow(palabra, paleta))
 cat("</center>")
 ```
 
 ---
+<div class="my-header"></div>
 
 ```{r, results='asis', echo=FALSE}
 cat("##")
@@ -76,12 +77,12 @@ cat("\n")
 - Me gusta **visualizar datos, visitar museos, tomar té, etc, etc.**
 
 <center>
-<img src="img/grafico.jpg" alt="Hex stickers" width="250">
-<img src="img/te.jpg" alt="Hex stickers" width="280">
+<img src="img/grafico.jpg" alt="Visualización de datos" width="250">
+<img src="img/te.jpg" alt="Té" width="280">
 </center>
 
 <center>
-<img src="img/museo.jpg" alt="Hex stickers" width="200">
+<img src="img/museo.jpg" alt="Museo Pompidou" width="200">
 </center>
 
 ---
@@ -106,95 +107,8 @@ cat("\n")
 ## Requisitos
 
 - Asumimos que ya tienen instalado R y RStudio
-- En caso contrario: seguir los pasos en este video  
-
----
-<div class="my-header"></div>
-
-## Programa tentativo
-
-
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-jass{background-color:#656565;border-color:#9b9b9b;color:#FFF;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-3gal{background-color:#656565;border-color:#9b9b9b;color:#FFF;text-align:center;vertical-align:top}
-.tg .tg-meum{background-color:#656565;border-color:#9b9b9b;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-fz0b{background-color:#FFF;border-color:#9b9b9b;color:#343434;text-align:center;vertical-align:top}
-.tg .tg-gzjo{background-color:#FFF;border-color:#9b9b9b;text-align:left;vertical-align:top}
-.tg .tg-o92t{background-color:#656565;border-color:#9b9b9b;text-align:left;vertical-align:top}
-</style>
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-meum"></th>
-    <th class="tg-jass">Día 1 (25/11)</th>
-    <th class="tg-jass">Día 2 (26/11)</th>
-    <th class="tg-jass">Día 3 (27/11)</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-3gal">09:00-10:00</td>
-    <td class="tg-fz0b">Intro a R y Rstudio</td>
-    <td class="tg-fz0b">Manipular datos II</td>
-    <td class="tg-gzjo" rowspan="6"><br><br><br><span style="color:#343434">- Paquete koboloader </span><br><span style="color:#343434">- QualMiner: Análisis de texto </span><br><span style="color:#343434">- Tratamiento y pocesamiento de datos - 5W</span></td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">10:00-10:05</td>
-    <td class="tg-3gal">Pausa</td>
-    <td class="tg-3gal">Pausa</td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">10:05-10:55</td>
-    <td class="tg-fz0b">Proyectos y RMarkdown</td>
-    <td class="tg-fz0b">Más manipulación de datos</td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">10:55-11:10</td>
-    <td class="tg-3gal">Pausa</td>
-    <td class="tg-3gal">Pausa</td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">11:10-11:40</td>
-    <td class="tg-fz0b">Importar datos</td>
-    <td class="tg-fz0b">Funciones</td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">11:40-11:45</td>
-    <td class="tg-3gal">Pausa</td>
-    <td class="tg-3gal">Pausa</td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">11:45-13:00</td>
-    <td class="tg-fz0b">Manipular datos I</td>
-    <td class="tg-fz0b">Interactuar con Kobo y Power BI</td>
-    <td class="tg-o92t"></td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">13:00-14:00</td>
-    <td class="tg-3gal">Almuerzo</td>
-    <td class="tg-3gal">Almuerzo</td>
-    <td class="tg-o92t"></td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">14:00-15:00</td>
-    <td class="tg-fz0b">Visualizar datos</td>
-    <td class="tg-fz0b">Gráficos, reportes y tablas</td>
-    <td class="tg-o92t"></td>
-  </tr>
-  <tr>
-    <td class="tg-3gal">15:00-16:00</td>
-    <td class="tg-fz0b">Visualizar datos</td>
-    <td class="tg-fz0b">Gráficos, reportes y tablas</td>
-    <td class="tg-o92t"></td>
-  </tr>
-</tbody>
-</table>
-
+- En caso contrario: seguir los pasos de [este video](https://www.youtube.com/watch?v=GkItqGfCkog&feature=youtu.be)  
+- También necesitamos PowerBI para el segundo día
 
 ---
 <div class="my-header"></div>
@@ -202,13 +116,13 @@ cat("\n")
 
 ## Desafíos de hoy
 
+- Entender qué es R y qué es RStudio
+
+- Aprender a organizar nuestros proyectos (de R)
 
 - Leer correctamente una base de datos
 
 - Generar nuevas columnas a partir de información de otras columnas y generar resúmenes a partir de los datos
-
-- Generar gráficos a partir de la base de datos usada
-
 
 ---
 <div class="my-header"></div>
@@ -269,20 +183,21 @@ cat(print_it_rainbow(palabra, paleta))
 
 - Realizar la mayoría de esas tareas
 - Automatizar procesos
-- Interactuar facilmente con muchas herramientas
+- Interactuar fácilmente con muchas herramientas
 
 Y además... es abierto y gratuito
 
 ---
+<div class="my-header"></div>
 
 ```{r, results='asis', echo=FALSE}
 cat("## ")
-palabra = unlist(strsplit("Desventaja", split = ""))
+palabra = unlist(strsplit("Desventaja: la típica relación de un usuario con R", split = ""))
 cat(print_it_rainbow(palabra, paleta))
 ```
 
-<center><img src="img/anteseratipo.png" alt="Hex stickers" height="510"></center>
-
+<center><img src="img/anteseratipo.png" alt="Caricatura sobre la relación del usuario con R. Al principio la relación es tormentosa y luego se hacen amigos." height="490"></center>
+<p style="color: gray; font-size:15px"> Ilustración de Allison Horst</p>
 
 ---
 <div class="my-header"></div>
@@ -295,6 +210,8 @@ cat(print_it_rainbow(palabra, paleta))
 - Generar reportes automáticos
 
 - Crear sitios web. p. ej.: https://violetr.netlify.app/
+
+- Hacer mapas
 
 - Desarrollar aplicaciones interactivas: 
   - https://shiny.rstudio.com/gallery/india-blood-banks.html
@@ -311,10 +228,13 @@ cat(print_it_rainbow(palabra, paleta))
   - Creado en una reunión de la UNHCR
   - Blog y grupo de Skype
 
+- [Charla](https://resources.rstudio.com/resources/rstudioglobal-2021/humanitarian-data-science-with-r/) de [Ahmadou Dicko](https://www.ahmadoudicko.com/) sobre R en contextos humanitarios en `rstudio::global` (subtítulos en Español). 
 
-- Documentación y Reproducibilidad de los procesos
-- Hay funciones específicamente hechas para manejar este tipo de datos y conectarse con herramientas populares como Kobo
-- Existes manuales de buenas prácticas sobre como crear reportes. Por ejemplo, [How to quickly produce statistical reports?
+- **Documentación** y **Reproducibilidad de los procesos**
+
+- Hay funciones específicamente hechas para manejar este tipo de datos y conectarse con herramientas populares como [Kobo](https://www.kobotoolbox.org/) o [HDX](https://data.humdata.org/).
+
+- Existen manuales de buenas prácticas sobre como crear reportes. Por ejemplo, [How to quickly produce statistical reports?
 The UNHCR “R-Cookbook”](https://edouard-legoupil.github.io/unhcr_paged/)
 
 
@@ -336,6 +256,8 @@ Licencia: [Creative Commons Attribution-ShareAlike 4.0 International License](ht
 Este material está inspirado en:
 
 - [R para Clima](https://eliocamp.github.io/r-clima/) de Paola Corrales y Elio Campitelli
+
+- [De excel a R](https://paocorrales.github.io/deExcelaR/index.html) de Paola Corrales y Elio Campitelli
 
 - [Master the Tidyverse](https://github.com/rstudio-education/master-the-tidyverse-instructors) de Garrett Grolemund
 
@@ -383,9 +305,7 @@ cat("</center>")
 
 <div class="my-header"></div>
 
-## RStudio
-
-### Como se ve la primera vez
+## RStudio: Como se ve la primera vez
 
 A la izquierda, en la consola, podemos escribir código en R 
 
@@ -400,9 +320,7 @@ Este se ejecutará al apretar `Enter`
 
 <div class="my-header"></div>
 
-## RStudio
-
-### Como se ve habitualmente
+## RStudio: Como se ve habitualmente
 
 Vamos a hacer cosas interesantes, y vamos a querer guardarlas
 
@@ -461,7 +379,7 @@ raiz_dos
 
 **En Excel:**
 
-Es parecido a hacer =SQRT(2) en la celda A2
+Es parecido a hacer =SQRT(2) (o =RCUAD(2)) en la celda A2
 
 Sabemos que ese resultado está en la celda A2
 
@@ -470,7 +388,7 @@ Sabemos que ese resultado está en la celda A2
 Ese resultado está en la variable `raiz_dos` que aparece en el environment (la mesada)
 
 **Pero... La analogía no es 100% util:**
-
+[PollEv.com/violetaroizm482](PollEv.com/violetaroizm482)
 ```{r}
 x <- 2
 y <- x + 2
@@ -571,8 +489,8 @@ Tenemos acceso a más funciones que las básicas a partir de **paquetes**  `r em
 
 - Podemos hacer nuestro propio paquete para nuestro flujo de trabajo
 
-<center><img src="img/aushex.png" alt="Hex stickers" height="320"></center>
-
+<center><img src="img/aushex.png" alt="Contorno de Australia formado por stickers en forma de héxagono. Imagen correspondiente a la conferencia UseR!" height="320"></center>
+<p style="color: gray; font-size:15px"> Ilustración de la conferencia UseR! 2018</p>
 
 ---
 <div class="my-header"></div>
@@ -584,7 +502,7 @@ Flujo de trabajo:
 
 Existe un **conjunto de paquetes** para realizar estas tareas
 
-<center><img src="img/hex-tidyverse.png" alt="Hex stickers" height="150"></center>
+<center><img src="img/hex-tidyverse.png" alt="Hex sticker del entorno tidyverse" height="150"></center>
 
 <p style="color: gray; font-size:13px"> Imágenes de "R para Ciencia de Datos" y Rstudio</p>
 
@@ -595,8 +513,8 @@ Existe un **conjunto de paquetes** para realizar estas tareas
 - tidy = ordenado
 - ...verse = universo
 
-<center><img src="img/tidyhexall.png" alt="Hex stickers" height="360s"></center>
-
+<center><img src="img/tidyhexall.png" alt="Algunos de los paquetes de tidyverse" height="360s"></center>
+<p style="color: gray; font-size:15px"> Ilustración de paquetes - RStudio</p>
 
 ---
 <div class="my-header"></div>
@@ -669,6 +587,24 @@ Es mejor buscar en inglés (hay más material)
 
 Algunas buenas fuentes:
 
-- stackoverflow (Preguntas y respuestas)
-- rstudio community (Foro)
+- [stackoverflow](https://stackoverflow.com/) (Preguntas y respuestas)
+- [RStudio community](https://community.rstudio.com/) (Foro)
 
+[También twitter es útil!](https://twitter.com/search?q=%23rstats&src=typeahead_click)
+
+---
+<div class="my-header"></div>
+
+## Licencia y materiales
+
+Licencia: [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES).
+
+Este material está inspirado y utiliza explicaciones de:
+
+- [R para Clima](https://eliocamp.github.io/r-clima/) de Paola Corrales y Elio Campitelli
+
+- [De excel a R](https://paocorrales.github.io/deExcelaR/index.html) de Paola Corrales y Elio Campitelli
+
+- [Master the Tidyverse](https://github.com/rstudio-education/master-the-tidyverse-instructors) de Garrett Grolemund
+
+Las diapositivas fueron creadas con el paquete `xaringan`.

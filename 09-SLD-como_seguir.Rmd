@@ -1,0 +1,108 @@
+---
+title: "¿Cómo seguir?"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "custom.css"]
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    lib_dir: libs
+    seal: false
+    nature:
+      ratio: 13:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.height=5) 
+library(ggplot2)
+library(readr)
+library(here)
+library(dplyr)
+library(colorspace)
+paleta <- rainbow_hcl(10)
+print_it_rainbow <- function(palabra, paleta) {
+  i_font = 1
+  for (char in palabra) {
+    if (char != " ") {
+      cat(paste0("<font style='color:", paleta[i_font] , "'>",char,"</font>"))
+      i_font = i_font %% length(paleta) + 1
+    } else {
+      cat(" ")
+    }
+  }
+}
+```
+
+background-color: #272822
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+```{r, results='asis', echo=FALSE}
+cat("<h1 style='color:white'> <center> R para contextos humanitarios de emergencia")
+cat("</center></h1> \n")
+cat("## <center>")
+palabra = unlist(strsplit("¿Cómo seguir?", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center> \n")
+cat("### <center>")
+fecha = as.character(Sys.Date())
+palabra = unlist(strsplit("Violeta Roizman", split = ""))
+cat(print_it_rainbow(palabra, paleta))
+cat("</center>")
+```
+
+---
+<div class="my-header"></div>
+## Esto fue todo
+
+- Tenemos una visión general de qué es R, qué es RStudio
+
+- Sabemos cómo se importan datos
+
+- Conocemos funciones para manipular datos
+
+- Vimos cómo graficar datos
+
+- Y cómo interactuar con otras herramientas
+
+---
+<div class="my-header"></div>
+## Cómo seguimos
+
+- [https://rstudio.cloud/learn/primers](https://rstudio.cloud/learn/primers)
+
+- Libro R para Ciencia de datos [https://r4ds-en-espaniol.netlify.app/](https://r4ds-en-espaniol.netlify.app/)
+
+- Ser parte de la comunidad de R en Twitter: [#DatosDeMiercoles](https://twitter.com/search?q=%23DatosDeMiercoles%20&src=typed_query) y [#TidyTuesday](https://twitter.com/search?q=%23TidyTuesday&src=typed_query)
+
+- [RSpatial_ES](https://t.me/rspatial_es)
+  
+- [RLadies](https://rladies.org/) (Bogotá, Barranquilla)
+
+- [Lista de Recursos en español](https://github.com/rladies/recursos_en_espanol)
+
+---
+<div class="my-header"></div>
+
+## Licencia y material usado
+
+Licencia: [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES).
+
+Este material está inspirado y utiliza explicaciones de:
+
+- [R para Clima](https://eliocamp.github.io/r-clima/) de Paola Corrales y Elio Campitelli
+
+- [De excel a R](https://paocorrales.github.io/deExcelaR/index.html) de Paola Corrales y Elio Campitelli
+
+- [Master the Tidyverse](https://github.com/rstudio-education/master-the-tidyverse-instructors) de Garrett Grolemund
+
+Las diapositivas fueron creadas con el paquete `xaringan`.

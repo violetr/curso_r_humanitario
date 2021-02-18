@@ -55,7 +55,7 @@ cat(print_it_rainbow(palabra, paleta))
 cat("</center> \n")
 cat("### <center>")
 fecha = as.character(Sys.Date())
-palabra = unlist(strsplit("25-11-2020", split = ""))
+palabra = unlist(strsplit("Violeta Roizman", split = ""))
 cat(print_it_rainbow(palabra, paleta))
 cat("</center>")
 ```
@@ -87,7 +87,9 @@ cat("</center> \n")
 ## Visualización de datos
 
 
-<center><img src="img/ggplot2_obra_maestra.png"  width="750"></center>
+<center><img src="img/ggplot2_obra_maestra.png"  width="700"></center>
+<p style="color: gray; font-size:15px"> Ilustración de Allison Horst.
+</p>
 
 ---
 <div class="my-header"></div>
@@ -111,19 +113,23 @@ ggplot(data = NULL, aes(1:20, 2 + 1.5 * 1:20 + rnorm(20))) +
 <div class="my-header"></div>
 ## Ejemplos:
 
-<center><img src="img/mapa1_ejemplo.png"  height="530"></center>
+<center><img src="img/mapa1_ejemplo.png"  height="500"></center>
+
+<p style="color: gray; font-size:15px"> Visualización de Cédric Scherer.
+</p>
 
 ---
 <div class="my-header"></div>
 ## Ejemplos:
 
-<center><img src="img/ggplot2-carbonprint.png"  height="530"></center>
-
+<center><img src="img/ggplot2-carbonprint.png"  height="500"></center>
+<p style="color: gray; font-size:15px"> Visualización de Cédric Scherer.
+</p>
 ---
 <div class="my-header"></div>
 ## Los datos: campamentos en Haití 
 
-Ahora vamos a trabajar un poco con el dataset de los campamentos de Haití
+Ahora vamos ver algunos ejemplos con un dataset de los campamentos de Haití
 
 ```{r include=FALSE}
 library(readxl)
@@ -161,19 +167,6 @@ Variables:
 - etc.
 
 Que relación pensamos que debería haber entre Cantidad de Viviendas y Cantidad de Individuos?
-
----
-<div class="my-header"></div>
-## Tu turno 1: Mi primer gráfico
-
-
-Corre este código en la notebook para generar el gráfico que queremos
-
-
-```{r, eval = FALSE}
-ggplot(data = haiti) +
-  geom_point(mapping = aes(x = Households, y = Individuals))
-```
 
 ---
 <div class="my-header"></div>
@@ -292,35 +285,47 @@ La leyenda se agrega automáticamente
 ---
 <div class="my-header"></div>
 
-##  Tu turno 2: 
-
-1.Agrega varias propiedades estéticas a tu gráfico:
-  - color
-  - size
-  - alpha
-  - shape
-
-
-2.Qué pasa si las variables son continuas o categóricas
-
----
-<div class="my-header"></div>
-
-## Posibles mapeos
-
-<center><img src="img/variables-aes.png"  height="530"></center>
-
----
-<div class="my-header"></div>
-
-## Como hacer este gráfico?
+## Cómo hacer este gráfico?
 
 ```{r, echo = FALSE}
 ggplot(data = haiti) +
   geom_point(mapping = aes(x = Households, 
                            y = Individuals),
+             color = "blue")
+```
+
+---
+<div class="my-header"></div>
+
+**Encuesta:** [PollEv.com/violetaroizm482](PollEv.com/violetaroizm482)
+
+a)
+```{r, eval = FALSE}
+ggplot(data = haiti) +
+  geom_point(mapping = aes(x = Households, y = Individuals),
+             color = "blue")
+```
+
+b)
+```{r, eval = FALSE}
+ggplot(data = haiti) +
+  geom_point(mapping = aes(x = Households, y = Individuals),
              color = "red")
 ```
+
+c)
+```{r, eval = FALSE}
+ggplot(data = haiti) +
+  geom_point(mapping = aes(x = Households, y = Individuals, color = "blue")
+```
+
+d)
+```{r, eval = FALSE}
+ggplot(data = haiti) +
+  geom_point(mapping = aes(x = Households, y = Individuals, color = "red"))
+```
+
+
 
 ---
 <div class="my-header"></div>
@@ -331,7 +336,7 @@ ggplot(data = haiti) +
 ggplot(data = haiti) + 
   geom_point(mapping = aes(x = Households, 
                            y = Individuals, 
-                           color = "red"))
+                           color = "blue"))
 ```
 
 ---
@@ -345,7 +350,7 @@ Si quiero indicar una característica estética NO linkeada a variable, entonces
 ggplot(data = haiti) + 
   geom_point(mapping = aes(x = Households, 
                            y = Individuals), 
-             color = "red")
+             color = "blue")
 ```
 
 ---
@@ -401,27 +406,36 @@ Mismos datos, mismo mapeo de aesthetics pero distinto geom
 ---
 <div class="my-header"></div>
 
-# Tu turno 3
+# Tu turno 1
 
-Reproducir este histograma de la variable Households con la ayuda de la guía rápida de `ggplot2`
+Reproducir este histograma de la distribución de la cantidad de personas que viven en el hogar del entrevistado (variable `b10_tamanio_hogar`) con la ayuda de la guía rápida de `ggplot2`. Usa `geom_histogram`.
 
 Ayuda: no utilizar la variable `y`
 
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+library(readxl)
+data_4ta_Ronda <- read_excel("data/MASTER_Base_Datos_4ta_Ronda_R_Capacitacion.xlsx", 
+                             sheet = "A_HOGAR")
+```
+
+
 ```{r,echo=FALSE}
-ggplot(data = haiti) + 
-  geom_histogram(mapping = aes(Individuals))
+ggplot(data_4ta_Ronda) +
+  geom_histogram(aes(b10_tamano_hogar),binwidth = 1)
 ```
 
 ---
 <div class="my-header"></div>
 
-# Gráficos de barras
+# Tu turno 2
 
-Reproducir este gráfico de barras que grafica la cantidad de campamentos en cada comuna. Utiliza la ayuda de la guía rápida de `ggplot2`.
+Reproducir este gráfico de barras que grafica la cantidad de encuestados por cada departamento. Utiliza la ayuda de la guía rápida de `ggplot2`. Usa `geom_bar`.
+
+Ayuda: no utilizar la variable `y`
 
 ```{r,echo=FALSE}
-ggplot(data = haiti) + 
-  geom_bar(mapping = aes(x = Commune, fill = Commune))
+ggplot(data_4ta_Ronda) +
+  geom_bar(aes(b6_departamento, fill = b6_departamento))
 ```
 
 ---
@@ -431,8 +445,8 @@ ggplot(data = haiti) +
 
 
 ```{r}
-ggplot(data = haiti) + 
-  geom_bar(mapping = aes(x = Commune, color = Commune))
+ggplot(data_4ta_Ronda) +
+  geom_bar(aes(b6_departamento, color = b6_departamento))
 ```
 
 ---
@@ -442,8 +456,8 @@ ggplot(data = haiti) +
 
 
 ```{r}
-ggplot(data = haiti) + 
-  geom_bar(mapping = aes(x = Commune, fill = Commune))
+ggplot(data_4ta_Ronda) +
+  geom_bar(aes(b6_departamento, fill = b6_departamento))
 ```
 ---
 <div class="my-header"></div>
@@ -452,19 +466,32 @@ ggplot(data = haiti) +
 
 
 ```{r}
-ggplot(data = haiti) + 
-  geom_bar(mapping = aes(x = Commune, fill = Commune)) +
+ggplot(data_4ta_Ronda) +
+  geom_bar(aes(b6_departamento, fill = b6_departamento)) + 
   coord_flip()
 ```
+---
+<div class="my-header"></div>
+
+# Gráficos de barras
+
+
+```{r}
+ggplot(data_4ta_Ronda) +
+  geom_bar(aes(b6_departamento, fill = b6_departamento)) + 
+  labs(y = "cantidad", x = "") +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
 
 ---
 <div class="my-header"></div>
 
-# Tu turno 5
+# Tu turno 3
 
 Predice la salida del siguiente código
-
-Luego, córrelo
 
 ```{r, eval = FALSE}
 ggplot(data = haiti) + 
@@ -518,9 +545,8 @@ ggplot(data = haiti, mapping = aes(x = Households, y = Individuals)) +
 
 Que sucede aquí?
 
-```{r}
-ggplot(data = haiti, mapping = aes(x = Households, 
-                                   y = Individuals,
+```{r, message = FALSE}
+ggplot(data = haiti, mapping = aes(x = Households, y = Individuals,
                                    color = `Water Provision`)) + 
   geom_point() +
   geom_smooth()
@@ -562,24 +588,20 @@ El tamaño default en general no es muy bueno. Podemos indicar las dimensiones
 ggsave("data/my-plot.pdf", width = 6, height = 6)
 ```
 
----
-<div class="my-header"></div>
+**Tu turno 4:** Salva tu último gráfico en la carpeta img de tu proyecto
 
-## Tu turno 6
+Si por algún motivo no estás en un proyecto, vuelve al proyecto del curso
 
-Salva tu último gráfico en la carpeta data de tu proyecto
-
-Si por algún motivo no estás en un proyecto, vuelve al proyecto del curso y si no tienes proyecto del curso crea uno nuevo
 
 ---
 <div class="my-header"></div>
 
 ## Más gráficos
 
-Volvamos a la tabla de decisiones de pedidos de asilos en Perú
+Volvamos a la tabla de decisiones de pedidos de asilos en Colombia
 
 ```{r, include=FALSE, message = FALSE}
-decisiones <- read_csv("data/decisiones_asilo_peru.csv") %>%
+decisiones <- read_csv("data/decisiones_asilo_colombia.csv") %>%
   mutate(total = Reconocidas + `Proteccion Complementaria` + `Cerradas de otra forma` + Rechazadas)
 ```
 
@@ -596,15 +618,6 @@ decisiones
 Podemos graficar una variable a lo largo del tiempo para detectar tendencias, eventos y sus consecuencias
 
 <center><img src="img/series_tiempo.png"  height="460"></center>
-
----
-<div class="my-header"></div>
-
-## Series de tiempo
-
-Podemos graficar una variable a lo largo del tiempo para detectar tendencias, eventos y sus consecuencias
-
-<center><img src="img/modas_nombres.png"  height="460"></center>
 
 ---
 ## Series de tiempo
@@ -633,7 +646,7 @@ decisiones %>%
 ---
 <div class="my-header"></div>
 
-## Tu turno 7:
+## Tu turno 5:
 
 
 Modifica el gráfico anterior para que la línea sea roja y cambia su grosor
@@ -648,28 +661,13 @@ decisiones %>%
 ---
 <div class="my-header"></div>
 
-## Tu turno 8:
-
-```{r, echo = FALSE}
-decisiones %>%
-  ggplot() +
-    geom_line(aes(Anio, total, 
-                  color = `Codigo Pais Origen`))
-```
-
-Grafica en un mismo plot la evolución del total de pedidos de asilo en Perú para los 5 países con mas pedidos
-
-
----
-<div class="my-header"></div>
-
 ## Gráficos por paneles
 
 A veces es más claro si tenemos varios paneles, uno para cada valor de una variable categórica/discreta
 
 ```{r, echo = FALSE}
 decisiones %>%
-  filter(`Codigo Pais Origen` %in% c("VEN", "COL", "CUB", "HTI")) %>%
+  filter(`Codigo Pais Origen` %in% c("VEN", "COL", "CUB", "ECU")) %>%
   ggplot() +
     geom_line(aes(Anio, total, 
                   color = `Codigo Pais Origen`)) +
@@ -700,7 +698,7 @@ Podemos obtener el gráfico anterior de la siguiente forma:
 
 ```{r, eval = FALSE}
 decisiones %>%
-  filter(`Codigo Pais Origen` %in% c("VEN", "COL", "CUB")) %>%
+  filter(`Codigo Pais Origen` %in% c("VEN", "ECU", "CUB")) %>%
   ggplot() +
   geom_line(aes(Anio, total, color = `Codigo Pais Origen`)) +
   facet_wrap(~ `Codigo Pais Origen`,)
@@ -720,15 +718,15 @@ ggplot() +
 ---
 <div class="my-header"></div>
 
-## Tu turno 9:
+## Tu Turno 6:
 
-1. Con la ayuda de la guía rapida intenta reproducir este gráfico que indica con una línea punteada el año del importante terremoto en Haití
+1. Con la ayuda de la guía rapida intenta reproducir este gráfico que indica con una línea punteada el año del importante terremoto en Haití. ¿Puedes cambiarlo por algún otro evento relevante para este gráfico?
 
 2. Quita la línea y modifícalo para que se vea en paneles 
 
 ```{r, echo = FALSE}
 decisiones %>%
-  filter(`Codigo Pais Origen` %in% c("VEN", "COL", "HTI")) %>%
+  filter(`Codigo Pais Origen` %in% c("VEN", "ECU", "CUB")) %>%
   ggplot() +
     geom_area(aes(Anio, total, 
                   fill = `Codigo Pais Origen`)) +
@@ -740,31 +738,26 @@ decisiones %>%
 
 ## Combinando gráficos: `patchwork`
 
-El paquete patchwork es muy útil para combinar gráficos
+El paquete `patchwork` es muy útil para combinar gráficos
 
 Al igual que los datos y los vectores, los gráficos también pueden guardarse en una variable
 
 ```{r}
-g1 <- decisiones %>%
-  filter(`Codigo Pais Origen` == "HTI") %>%
-  ggplot() +
-    geom_area(aes(Anio, total), fill = "red") +
-    geom_vline(xintercept = 2010,linetype = 2) 
+g1 <- ggplot(data_4ta_Ronda) +
+  geom_histogram(aes(b10_tamano_hogar),binwidth = 1)
 ```
 
 ```{r}
-g2 <- ggplot(data = haiti) + 
-  geom_bar(mapping = aes(x = Commune, fill = Commune)) +
+g2 <- ggplot(data_4ta_Ronda) +
+  geom_bar(aes(b6_departamento, fill = b6_departamento)) +
   coord_flip() +
   theme(legend.position = "none")
 ```
 
 
 ```{r}
-g3 <- ggplot(data = haiti) +
-  geom_point(mapping = aes(x = Households, 
-                           y = Individuals,
-                           color = `Water Provision`)) 
+g3 <- ggplot(data_4ta_Ronda) +
+  geom_point(aes(b10_tamano_hogar, e1_total))
 ```
 
 ---
@@ -793,42 +786,18 @@ library(patchwork)
 ---
 <div class="my-header"></div>
 
-## Tu turno 10
+## DESAFIO 2 
 
-Instala `patchwork` y reproduce el siguiente gráfico
+1. Trabajemos un poco más con la encuesta del dataset `data_4taronda` 
 
-```{r, echo=FALSE}
-patchs <- (g2 | (g1 / g3)) 
-patchs + plot_annotation(title = "Resumen de Haiti")
-#ggsave("img/patchwork.png")
-```
+2. ¿Cuántas personas respondieron la encuesta?
 
----
-<div class="my-header"></div>
+3. Representa un gráfico de barras que represente el nivel educativo de los encuestados
 
-## DESAFIO 2
+3. Representa un gráfico de la cantidad de personas con trabajo en el hogar en función de la cantidad de personas del hogar
 
-1. Importa el dataset `dtm3-peru` (cuidado con la primera fila, salteala)
+3. Representa un gráfico por paneles de la distribución de la cantidad de personas que viven en un hogar que discrimine según departamento
 
-[https://data.humdata.org/dataset/dad01c41-adde-46ee-998d-a6baf9eeb8d1/resource/538975d3-f7bb-4f0d-9111-58f7e00ee4f1/download/dtm3_version_publica_1209-1.xlsx](https://data.humdata.org/dataset/dad01c41-adde-46ee-998d-a6baf9eeb8d1/resource/538975d3-f7bb-4f0d-9111-58f7e00ee4f1/download/dtm3_version_publica_1209-1.xlsx)
-
-2. Cuántas personas respondieron la encuesta?
-
-3. Haz un gráfico que represente la distribución del "Número de Familias que viven en la misma carpa o techo"
-
-4. Representa con la ayuda de la guía rápida un gráfico de barras apiladas del "Número de Familias que viven en la misma carpa o techo" que discrimine según distrito
-
-5. Representa con la ayuda de la guía rápida un gráfico de barras lado a lado del "Número de Familias que viven en la misma carpa o techo" que discrimine según distrito
-
----
-<div class="my-header"></div>
-
-
-6. Representa el "Número de Familias que viven en la misma carpa o techo" en paneles según el distrito
-
-7. Que tipo de ganados tienen l@s encuestad@s? usar `?count` (ayuda) para averiguar cuántas personas tienen cada tipo de ganado 
-
-8. Explora las preguntas que te interesen
 
 ---
 <div class="my-header"></div>
@@ -850,7 +819,7 @@ patchs + plot_annotation(title = "Resumen de Haiti")
 <div class="my-header"></div>
 ## Para seguir
 
-Hay muuuchas cosas para hacer con `ggplot2`
+Puedo hacer muuuchas cosas con `ggplot2`
 
 - [R para Ciencia de Datos](https://es.r4ds.hadley.nz/)
 
@@ -858,10 +827,24 @@ Hay muuuchas cosas para hacer con `ggplot2`
 
 - [Data Visualization - A practical introduction](https://socviz.co/)
 
-Vamos a ver un poco más sobre como arreglar gráficos para publicar: 
+Un poco más sobre como arreglar gráficos para publicar: 
 
-- Títulos y leyendas
+- Títulos y otros textos
 - Etiquetas
 - Temas
 - Colores
-- Anotaciones
+
+---
+<div class="my-header"></div>
+
+## Licencia y material usado
+
+Licencia: [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES).
+
+Este material está inspirado y utiliza explicaciones de:
+
+- [R para Clima](https://eliocamp.github.io/r-clima/) de Paola Corrales y Elio Campitelli
+
+- [Master the Tidyverse](https://github.com/rstudio-education/master-the-tidyverse-instructors) de Garrett Grolemund
+
+Las diapositivas fueron creadas con el paquete `xaringan`.

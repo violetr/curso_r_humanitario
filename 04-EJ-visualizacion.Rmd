@@ -3,36 +3,19 @@ title: "04-EJ-visualizacion"
 output: html_document
 ---
 
-## Tu turno 1: Mi primer gráfico
+Trabajaremos en principio con dos datasets conocidos hasta ahora: decisiones y 4ta ronda respuesta COVID
 
-
-Copia y corre el código para generar el gráfico que queremos
-
-
-```{r}
-
+```{r, include = FALSE, message=FALSE}
+library(readxl)
+library(tidyverse)
+decisiones <- read_csv("data/decisiones_asilo_colombia.csv")
+data_4ta_ronda <- read_excel("data/MASTER_Base_Datos_4ta_Ronda_R_Capacitacion.xlsx", 
+    sheet = "A_HOGAR")
 ```
 
+## Tu turno 1
 
-##  Tu turno 2: 
-
-1.Agrega varias propiedades estéticas a tu gráfico:
-  - color
-  - size
-  - alpha
-  - shape
-
-```{r}
-
-```
-
-
-2.que pasa si las variables son continuas o categóricas
-
-
-# Tu turno 3
-
-Reproducir el histograma de la variable Households con la ayuda de la guía rápida de `ggplot2`
+Reproducir este histograma de la distribución de la cantidad de personas que viven en el hogar del entrevistado (variable `b10_tamanio_hogar`, dataset `data_4ta_ronda`) con la ayuda de la guía rápida de `ggplot2`. Usa `geom_histogram`.
 
 Ayuda: no utilizar la variable `y`
 
@@ -41,84 +24,41 @@ Ayuda: no utilizar la variable `y`
 ```
 
 
-## Tu turno 5
+# Tu turno 2
 
-Predice la salida del siguiente código
+Reproducir este gráfico de barras que grafica la cantidad de encuestados por cada departamento. Utiliza la ayuda de la guía rápida de `ggplot2`. Usa `geom_bar`.
 
-Luego, córrelo
-
-```{r, eval = FALSE}
-ggplot(data = haiti) + 
-  geom_point(mapping = aes(x = Households, y = Individuals)) +
-  geom_smooth(mapping = aes(x = Households, y = Individuals))
-```
-
-## Tu turno 6
-
-Salva tu último gráfico en la carpeta data de tu proyecto
-
-Si por algún motivo no estás en un proyecto, vuelve al proyecto del curso y si no tienes proyecto del curso vuelve a abrirlo
-
-
-## Tu turno 7:
-
-
-Modifica el gráfico anterior para que la línea sea roja y cambia su grosor
+Ayuda: no utilizar la variable `y`
 
 ```{r}
 
 ```
 
 
-## Tu turno 8:
+## Tu turno 4
 
-Corre el siguiente codigo. 
+Salva tu último gráfico en la carpeta img de tu proyecto
 
-```{r}
-decisiones %>%
-  ggplot() +
-    geom_line(aes(Anio, total, 
-                  color = `Codigo Pais Origen`))
-```
-
-Los colores no pueden distinguiste bien.
-
-Grafica en un mismo plot la evolución del total de pedidos de asilo en Perú para los 5 países con mas pedidos
+Si por algún motivo no estás en un proyecto, vuelve al proyecto del curso
 
 ```{r}
 
 ```
 
 
+## DESAFIO 2 
 
-## Tu turno 9:
+1. Trabajemos un poco más con la encuesta del dataset `data_4ta_ronda` 
 
-1. Con la ayuda de la guía rapida intenta reproducir este gráfico que indica con una línea punteada el año del importante terremoto en Haití
+2. ¿Cuántas personas respondieron la encuesta?
 
-2. Quita la línea y modifícalo para que se vea en paneles 
+3. Representa un gráfico de barras que represente el nivel educativo de los encuestados
 
-```{r}
+3. Representa un gráfico de la cantidad de personas con trabajo en el hogar en función de la cantidad de personas del hogar
 
-```
-
-## Tu turno 10
-
-Instala `patchwork` y reproduce el siguiente gráfico
+3. Representa un gráfico por paneles de la distribución de la cantidad de personas que viven en un hogar que discrimine según departamento
 
 ```{r}
 
 ```
 
-
-## DESAFIO 2
-
-1. Importa el dataset `dtm3-peru` (cuidado con la primera fila, salteala)
-
-2. Cuántas personas respondieron la encuesta?
-
-3. Hacer un gráfico que represente "Número de Familias que viven en la misma carpa o techo"
-
-4. 
-
-
-- Anotaciones
